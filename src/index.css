@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  body {
+    color: #3a032d;
+    background-color: white; /* Optional: Apply to entire background */
+    font-family: sans-serif;
+  }
+}
+
+
+:root {
+  --light-blue-text: #474c6e;
+  --rows-maroon: #3a032d;
+  --background-tint: #fbfaff;
+  --yellow: #fdb71c;
+  --lightest-maroon: #b894c0;
+  --eggshell: #f6f3f0;
+  --dark-blue: #141730;
+  --white: white;
+  --grey: #e9e6e8;
+  --rich-orange: #ee5547;
+  --maroon: #3c2342;
+  --black-maroon: #1e0f22;
+  --light-maroon: #715777;
+  --light-dimmed-text: #878aa5;
+  --lavender: #dfe8ff;
+  --midnight-blue: #2d335d;
+  --pale-goldenrod: #ffeeb5;
+  --green: #47c969;
+  --maroon-dark: #2a0121;
+  --blue: #6955ff;
+  --ice-green: #8efff2;
+  --bright-orange: #ff9634;
+  --darker-blue: #0a0d25;
+  --dark-maroon: #2a192e;
+  --link-color: var(--rows-maroon)
+}
