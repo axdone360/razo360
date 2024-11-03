@@ -1,0 +1,38 @@
+.parent-container {
+    display: flex;
+    width: 1169px;
+    background-color: #FDF7FA;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .section {
+    width: 338.2px;
+    padding: 20px;
+    background-color: #EFEFEF;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .section-image {
+    width: 100%;
+    max-width: 100px;
+    margin-bottom: 15px;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .section-content {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
