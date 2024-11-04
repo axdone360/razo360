@@ -32,7 +32,7 @@ Your Business
             <Check className="w-5 h-5" />
             <span>Strategies used</span>
           </div>
-          <div className="flex items-center justify-center text-center gap-2">
+          <div className="flex  text-start gap-2">
             <Check className="w-5 h-5" />
             <span>Whether razo360.com is the right team for you
             </span>

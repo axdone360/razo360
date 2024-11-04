@@ -18,7 +18,7 @@ function BrandTicker() {
   ];
 
   return (
-    <div className={`${styles.brandTickerContainer} bg-secondary`}>
+    <div className={`${styles.brandTickerContainer} bg-secondry`}>
       <h3 className="text-center text-gray-700 font-bold mb-8">
         Trusted by ambitious brands like
       </h3>
