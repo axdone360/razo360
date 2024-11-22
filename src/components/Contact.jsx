@@ -1,8 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import { Check, Plus } from 'lucide-react';
+import ContactModal from './ContactModal';
 
 const ContactSection = () => {
+  const [isModalOpen, setModalOpen] = useState(true);
+
   return (
     <div  className='bg-white  justify-center items-center px-60  max-sm:px-6 h-[355px]'>
 
@@ -17,6 +20,7 @@ const ContactSection = () => {
       Connect with us 
 
       </button>
+      <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
 
       {/* Bottom section with checkmarks */}
       <div className="bg-contactSecondry rounded-b-lg w-full mt-10 py-8 px-4">
