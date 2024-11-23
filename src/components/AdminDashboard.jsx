@@ -8,6 +8,7 @@ import {
   ChevronLeft 
 } from 'lucide-react';
 import BlogAdd from './Blogging_Component /BlogAdd';
+import Lead_management from './Leads/Lead_management';
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('welcome');
@@ -29,6 +30,7 @@ const AdminDashboard = () => {
           <div className="bg-white shadow-md rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Lead Management</h2>
             <p className="text-gray-600">Lead tracking and management tools.</p>
+            <Lead_management/>
           </div>
         );
       default:

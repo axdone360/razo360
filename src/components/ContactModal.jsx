@@ -1,5 +1,6 @@
 import { X, Check } from "lucide-react";
 import { useState } from "react";
+import axios from "axios";
 
 const ContactModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({
@@ -16,9 +17,12 @@ const ContactModal = ({ isOpen, onClose }) => {
       });
     };
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log("Form Submitted:", formData);
+      console.log("Form submitting");
+      
+      const response = await axios.post("http://localhost:3000/api/v1/lead/contactForm_lead_submission", formData);
+      console.log("Form Submitted:", response);
       onClose(); // Close modal after submission
     };
   
