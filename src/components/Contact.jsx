@@ -4,7 +4,7 @@ import { Check, Plus } from 'lucide-react';
 import ContactModal from './ContactModal';
 
 const ContactSection = () => {
-  const [isModalOpen, setModalOpen] = useState(true);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <div  className='bg-white  justify-center items-center px-60  max-sm:px-6 h-[355px]'>
@@ -16,9 +16,8 @@ const ContactSection = () => {
       <h2 className="text-4xl max-sm:text-3xl font-bold my-3 text-purple-950 ">
       Lets’ talk With our Experts 
       </h2>
-      <button   onClick={() => window.open("https://wa.me/917907682565", "_blank")} className="bg-yellow-500 w-[230px] hover:bg-yellow-600 text-purple-950 font-semibold mt-7 py-3 px-8 rounded-md transition-colors">
+      <button   onClick={() => setModalOpen(true)} className="bg-yellow-500 w-[230px] hover:bg-yellow-600 text-purple-950 font-semibold mt-7 py-3 px-8 rounded-md transition-colors">
       Connect with us 
-
       </button>
       <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
 

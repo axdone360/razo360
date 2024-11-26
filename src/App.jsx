@@ -4,10 +4,14 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import {atom, RecoilRoot} from "recoil";
+import BlogDetail from "./components/Blogging_Component /BlogTemplate";
+import Article from "./components/Article";
+
+const storedAuthState = localStorage.getItem('Admin_State') === 'true';
 
 export  const Admin_State = atom({
   key: 'Admin_State',
-  default: false,
+  default: storedAuthState,
 });
 
 
@@ -21,8 +25,10 @@ function App() {
     <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/article" element={<Article />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-panel" element={<Admin />} />
+          <Route path="/blog/:description" element={<BlogDetail />} />
     </Routes>
 
     </Router>

@@ -5,10 +5,14 @@ import {
   List, 
   Users, 
   ChevronRight, 
-  ChevronLeft 
+  ChevronLeft ,
+  MessageCircleDashed
 } from 'lucide-react';
 import BlogAdd from './Blogging_Component /BlogAdd';
 import Lead_management from './Leads/Lead_management';
+import BlogList from './Blogging_Component /BlogList';
+import Contactlead from './Leads/contactlead';
+import Dashboard from './Dashboard/dashboard';
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('welcome');
@@ -20,40 +24,30 @@ const AdminDashboard = () => {
         return <BlogAdd />;
       case 'showPosts':
         return (
-          <div className="bg-white shadow-md rounded-lg p-6">
+          <div className="bg-white h-full shadow-md rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Manage Posts</h2>
-            <p className="text-gray-600">Post management content will go here.</p>
+            <BlogList />
           </div>
         );
       case 'leadManagement':
         return (
-          <div className="bg-white shadow-md rounded-lg p-6">
+          <div className="bg-white h-full shadow-md rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Lead Management</h2>
-            <p className="text-gray-600">Lead tracking and management tools.</p>
             <Lead_management/>
           </div>
         );
+        case 'contactManagement':
+          return (
+            <div className="bg-white h-full shadow-md rounded-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Client Inquiries</h2>
+              <Contactlead />
+            </div>
+          );
       default:
         return (
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Admin Dashboard</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="text-xl font-semibold text-blue-800 mb-2">Quick Stats</h3>
-                <ul className="space-y-2">
-                  <li className="text-gray-700">Total Posts: 24</li>
-                  <li className="text-gray-700">New Leads: 5</li>
-                </ul>
-              </div>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h3 className="text-xl font-semibold text-green-800 mb-2">Recent Activity</h3>
-                <ul className="space-y-2">
-                  <li className="text-gray-700">New post created</li>
-                  <li className="text-gray-700">3 leads processed</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      
+            <Dashboard/>
+     
         );
     }
   };
@@ -115,6 +109,11 @@ const AdminDashboard = () => {
             icon={<Users size={20} />} 
             label="Lead Management" 
             section="leadManagement" 
+          />
+                    <SidebarItem 
+            icon={<MessageCircleDashed size={20} />} 
+            label="Client Inquiries" 
+            section="contactManagement" 
           />
         </ul>
       </div>

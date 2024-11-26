@@ -14,7 +14,6 @@ import {
 
 // Constants for select options
 const STATUS_OPTIONS = ["Open", "Closed", "Expired", "Not Interested"];
-
 const INTERESTED_IN_OPTIONS = [
   "Web Development",
   "Mobile App",
@@ -22,184 +21,17 @@ const INTERESTED_IN_OPTIONS = [
   "Digital Marketing",
   "Cloud Services",
 ];
-
 const LEAD_FROM_OPTIONS = [
-  "Inbound",
-  "Outbound"
+  "Website",
+  "Referral",
+  "Social Media",
+  "Direct",
+  "Event",
 ];
 
-const AddLeadModal = ({ isOpen, onClose, onSave }) => {
-  const [newLead, setNewLead] = useState({
-    clientName: "",
-    companyName: "",
-    companyType: "",
-    clientMsg: "",
-    leadFrom: "",
-    phoneNumber: "",
-    clientIntersted: "",
-    status: "",
-    painPoint: "",
-    meetPinPoint: "",
-  });
+1
 
-  if (!isOpen) return null;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(newLead);
-    onClose();
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Add New Lead</h2>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <input
-                className="p-2 border rounded-lg"
-                placeholder="Client Name"
-                value={newLead.clientName}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, clientName: e.target.value })
-                }
-              />
-              <input
-                className="p-2 border rounded-lg"
-                placeholder="Company Name"
-                value={newLead.companyName}                                                                                                                                                   
-                onChange={(e) =>
-                  setNewLead({ ...newLead, companyName: e.target.value })
-                }                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-              />
-              <input
-                className="p-2 border rounded-lg"
-                placeholder="Company Type"
-                value={newLead.companyType}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, companyType: e.target.value })
-                }
-              />
-              <input
-                className="p-2 border rounded-lg"
-                placeholder="Phone Number"
-                value={newLead.phoneNumber}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, phoneNumber: e.target.value })
-                }
-              />
-
-              <select
-                className="p-2 border rounded-lg"
-                value={newLead.leadFrom}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, leadFrom: e.target.value })
-                }
-              >
-                <option value="">Select Lead Source</option>
-                {LEAD_FROM_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                className="p-2 border rounded-lg"
-                value={newLead.status}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, status: e.target.value })
-                }
-              >
-                <option value="">Select Status</option>
-                {STATUS_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                className="p-2 border rounded-lg"
-                value={newLead.clientIntersted}
-                onChange={(e) =>
-                  setNewLead({ ...newLead, clientIntersted: e.target.value })
-                }
-              >
-                <option value="">Select Interest</option>
-                {INTERESTED_IN_OPTIONS.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <textarea
-              className="w-full p-2 border rounded-lg"
-              placeholder="Client Message"
-              value={newLead.clientMsg}
-              onChange={(e) =>
-                setNewLead({ ...newLead, clientMsg: e.target.value })
-              }
-              rows={3}
-            />
-
-            <textarea
-              className="w-full p-2 border rounded-lg"
-              placeholder="Pain Points"
-              value={newLead.painPoint}
-              onChange={(e) =>
-                setNewLead({ ...newLead, painPoint: e.target.value })
-              }
-              rows={2}
-            />
-
-            <textarea
-              className="w-full p-2 border rounded-lg"
-              placeholder="Meeting Points"
-              value={newLead.meetPinPoint}
-              onChange={(e) =>
-                setNewLead({ ...newLead, meetPinPoint: e.target.value })
-              }
-              rows={2}
-            />
-
-            <div className="flex justify-end space-x-2">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border rounded-lg hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={()=>handleSubmit()}
-                type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              >
-                Save Lead
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
-const Lead_management = () => {
+const  Contactlead = () => {
   const [leads, setLeads] = useState([]);
   const [filteredLeads, setFilteredLeads] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -216,30 +48,19 @@ const Lead_management = () => {
   }, []);
 
   const fetchLeads = async () => {
-    console.log("fetching leads to refresh"); 
-    
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/lead/leadList"
+        "http://localhost:3000/api/v1/lead/contactList"
       );
-      setLeads(response.data.Leads_List);
-      setFilteredLeads(response.data.Leads_List);
+
+      setLeads(response.data.data);
+      setFilteredLeads(response.data.data);
     } catch (error) {
       console.error("Error fetching leads:", error);
     }
   };
 
-
-  const handleAddLead = async (newLead) => {
-    console.log("posting new elad");
-    try {
-      
-      await axios.post("http://localhost:3000/api/v1/lead/create", newLead);
-      fetchLeads();
-    } catch (error) {
-      console.error("Error adding lead:", error);
-    }
-  };
+  
 
   useEffect(() => {
     let filtered = [...leads];
@@ -268,8 +89,8 @@ const Lead_management = () => {
 
     setFilteredLeads(filtered);
   }, [searchTerm, filters, leads]);
-  // ... (keep handleAddLead and useEffect for filtering unchanged)
-
+  2;
+  // ... (keep existing handleUpdate, handleSaveUpdate, handleDelete, and renderLeadRow functions)
   const handleUpdate = (lead) => {
     setEditingLead({ ...lead });
   };
@@ -277,7 +98,7 @@ const Lead_management = () => {
   const handleSaveUpdate = async () => {
     try {
       await axios.put(
-        `${import.meta.env.BACKENDSERVER}/lead/updateLead/${editingLead.id}`,
+        `http://localhost:3000/api/v1/lead/updateLead/${editingLead.id}`,
         editingLead
       );
       fetchLeads();
@@ -301,7 +122,7 @@ const Lead_management = () => {
       return (
         <tr key={lead.id} className="bg-yellow-50">
           {Object.entries(lead).map(([key, value]) => {
-            if (key === 'id' || key === 'clientMsg' || key === 'createdDate') return null;
+            if (key === 'id'  || key === 'createdDate') return null;
             if (key === 'status') {
               return (
                 <td key={key} className="p-2">
@@ -321,6 +142,14 @@ const Lead_management = () => {
                 </td>
               );
             }
+            if (key === "leadFrom") {
+              return (
+                <td key={key} className="p-2">
+                  {value || "N/A"}
+                </td>
+              );
+            }
+  
             if (key === 'clientIntersted') {
               return (
                 <td key={key} className="p-2">
@@ -374,7 +203,7 @@ const Lead_management = () => {
     return (
       <tr key={lead.id} className="border-b hover:bg-gray-50 transition">
         {Object.entries(lead).map(([key, value]) => {
-          if (key === 'id' || key === 'clientMsg'|| key==="createdDate") return null;
+          if (key === 'id' || key==="createdDate") return null;
           return (
             <td
               key={key}
@@ -404,19 +233,7 @@ const Lead_management = () => {
 
   return (
     <div className="container mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="p-4 flex justify-between items-center">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2"
-        >
-          <Plus size={20} />
-          Add Lead
-        </button>
-        <div className="flex space-x-4 ">
-          <button className="bg-green-500  p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Inbound"})}>Inbound</button>
-          <button className="bg-orange-500 p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Outbound"})}>Outbound</button>
-        </div>
-      </div>
+ 
 
       <div className="p-4 bg-gray-100 border-b flex items-center justify-between">
         <div className="flex items-center space-x-4">
@@ -464,10 +281,12 @@ const Lead_management = () => {
         </div>
       </div>
 
+      {/* Keep existing table structure */}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gray-100 border-b">
             <tr>
+          
               <th
                 key="clienName"
                 className="p-4 text-left text-sm font-medium text-gray-600"
@@ -485,6 +304,12 @@ const Lead_management = () => {
                 className="p-4 text-left text-sm font-medium text-gray-600"
               >
                 Company Category
+              </th>
+              <th
+                key="clientMsg"
+                className="p-4 text-left text-sm font-medium text-gray-600"
+              >
+                Client Message
               </th>
               <th
                 key="leadFrom"
@@ -535,15 +360,9 @@ const Lead_management = () => {
         <div className="text-center p-8 text-gray-500">No leads found</div>
       )}
 
-      {isModalOpen && (
-        <AddLeadModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleAddLead}
-        />
-      )}
+   
     </div>
   );
 };
 
-export default Lead_management;
+export default  Contactlead;

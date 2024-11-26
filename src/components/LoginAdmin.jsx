@@ -19,11 +19,10 @@ const Login = () => {
         password: credentials.password
       });
       
-console.log(response);
 
       if (response.status===200) {
       setAuth(true)
-
+      localStorage.setItem('Admin_State', 'true');
         navigate('/admin-panel');
       }
     } catch (error) {
