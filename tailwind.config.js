@@ -31,6 +31,9 @@ module.exports = {
         '2xl': '1536px',
       }
     },
+    fontFamily: {
+      clash: ['"Clash Grotesk"', 'sans-serif'], // Custom font alias
+    },
   },
   plugins: [addVariablesForColors],
   

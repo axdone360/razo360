@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 
 export const ProcessTimeline = ({ data }) => {
@@ -41,7 +41,7 @@ export const ProcessTimeline = ({ data }) => {
       <div className="relative max-w-5xl mx-auto">
         {/* Vertical timeline line */}
         <motion.div
-          className="absolute left-1/2 max-sm:left-0 transform -translate-x-1/2 w-1 bg-gray-200 h-full"
+          className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-200 h-full"
           style={{
             background: `linear-gradient(to bottom, #FCD34D ${
               (stepCompletion.filter(Boolean).length / data.length) * 100
@@ -51,7 +51,7 @@ export const ProcessTimeline = ({ data }) => {
 
         {/* Sticky animated checkbox */}
         <motion.div
-          className="sticky left-1/2 max-sm:left-0   transform -translate-x-1/2 z-20"
+          className="sticky left-1/2 transform -translate-x-1/2 z-20"
           style={{ top: "50%" }}
         >
           <motion.div
@@ -82,16 +82,16 @@ export const ProcessTimeline = ({ data }) => {
                 y: 0,
                 transition: {
                   type: "spring",
-                  stiffness: 100,
+                  stiffness: 50,
                   damping: 20,
-                  delay: index * 0.2,
+                  delay: index * 0.1,
                 },
               }}
               viewport={{ once: true }}
             >
               {/* Dot for each step */}
               <div
-                className={`absolute left-1/2 max-sm:left-0 transform -translate-x-1/2 w-4 h-4 rounded-full ${
+                className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full ${
                   stepCompletion[index]
                     ? "bg-yellow-400"
                     : "bg-white border-2 border-gray-300"
@@ -99,33 +99,28 @@ export const ProcessTimeline = ({ data }) => {
               />
 
               {/* Step title and content */}
-              <div
-                className={`flex flex-col sm:flex-row  items-start sm:gap-8 lg:gap-12 ${
-                  index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
-                }`}
-              >
-                {/* Step title */}
-                <div
-                  className={`w-full sm:w-1/2 ${
-                    index % 2 === 0 ? "sm:text-right" : "sm:text-left"
-                  }`}
-                >
-                  <h3 className="text-3xl  max-sm:pl-4 sm:text-4xl lg:text-5xl font-semibold mb-2">
+              <div className="flex flex-col sm:flex-row items-start sm:gap-8 lg:gap-12">
+                {/* Step title (always on the left) */}
+                <div className="w-full sm:w-1/2 sm:text-right pr-4">
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2">
                     {item.title}
                   </h3>
                 </div>
 
-                {/* Step description */}
+                {/* Step description (always on the right) */}
                 <div className="w-full sm:w-1/2">
                   <div className="space-y-2">
                     {Array.isArray(item.content) ? (
                       item.content.map((text, i) => (
-                        <p key={i} className="text-gray-600 max-sm:pl-4 text-lg sm:text-xl lg:text-2xl">
+                        <p
+                          key={i}
+                          className="text-gray-600 text-lg sm:text-xl lg:text-2xl"
+                        >
                           {text}
                         </p>
                       ))
                     ) : (
-                      <p className="text-gray-600 max-sm:pl-4 text-lg sm:text-xl lg:text-2xl">
+                      <p className="text-gray-600 text-lg sm:text-xl lg:text-2xl">
                         {item.content}
                       </p>
                     )}
