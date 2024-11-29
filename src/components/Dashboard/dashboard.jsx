@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/lead/dashboardLeads");
+      const response = await axios.get(`${import.meta.env.VITE_BACKENDSERVER}/lead/dashboardLeads`,{withCredentials:true});
       setDashboardData(response.data.data);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -30,8 +30,8 @@ const Dashboard = () => {
     datasets: [
       {
         data: Object.values(dashboardData.statusCount),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+        backgroundColor: ['#36A2EB', '#4BC0C0', '#FFCE56', '#FF6384'],
+        hoverBackgroundColor: ['#36A2EB', '#4BC0C0', '#FFCE56', '#FF6384'],
       },
     ],
   };

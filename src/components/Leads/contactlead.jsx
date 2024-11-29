@@ -49,10 +49,11 @@ const  Contactlead = () => {
 
   const fetchLeads = async () => {
     try {
+   
       const response = await axios.get(
-        "http://localhost:3000/api/v1/lead/contactList"
+        `${import.meta.env.VITE_BACKENDSERVER}/lead/contactList`,{withCredentials:true}
       );
-
+      
       setLeads(response.data.data);
       setFilteredLeads(response.data.data);
     } catch (error) {
@@ -98,8 +99,8 @@ const  Contactlead = () => {
   const handleSaveUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/api/v1/lead/updateLead/${editingLead.id}`,
-        editingLead
+        `${import.meta.env.VITE_BACKENDSERVER}/lead/updateLead/${editingLead.id}`,
+        editingLead,{withCredentials:true}
       );
       fetchLeads();
       setEditingLead(null);
@@ -110,7 +111,7 @@ const  Contactlead = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/lead/delete/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKENDSERVER}/lead/delete/${id}`,{withCredentials:true});
       fetchLeads();
     } catch (error) {
       console.error("Error deleting lead:", error);

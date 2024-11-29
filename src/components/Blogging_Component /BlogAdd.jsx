@@ -20,10 +20,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import "./styles.scss";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { auto } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
+
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
@@ -60,107 +57,108 @@ const MenuBar = () => {
   return (
     <div className="control-group bg-white border-b p-4">
       <div className="button-group flex flex-wrap gap-2 items-center">
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          isActive={editor.isActive("bold")}
-          disabled={!editor.can().chain().focus().toggleBold().run()}
-          icon={Bold}
-        >
-          Bold
-        </MenuButton>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          isActive={editor.isActive("italic")}
-          disabled={!editor.can().chain().focus().toggleItalic().run()}
-          icon={Italic}
-        >
-          Italic
-        </MenuButton>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          isActive={editor.isActive("strike")}
-          disabled={!editor.can().chain().focus().toggleStrike().run()}
-          icon={Strikethrough}
-        >
-          Strikethrough
-        </MenuButton>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleCode().run()}
-          isActive={editor.isActive("code")}
-          disabled={!editor.can().chain().focus().toggleCode().run()}
-          icon={Code}
-        >
-          Code
-        </MenuButton>
+        {/* Text Formatting Buttons */}
+        <div className="flex items-center gap-2">
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            isActive={editor.isActive("bold")}
+            icon={Bold}
+          >
+            Bold
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            isActive={editor.isActive("italic")}
+            icon={Italic}
+          >
+            Italic
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            isActive={editor.isActive("strike")}
+            icon={Strikethrough}
+          >
+            Strikethrough
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleCode().run()}
+            isActive={editor.isActive("code")}
+            icon={Code}
+          >
+            Code
+          </MenuButton>
+        </div>
 
         <div className="border-r h-6 mx-2"></div>
 
-        <MenuButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          isActive={editor.isActive("heading", { level: 1 })}
-          icon={Heading}
-        >
-          H1
-        </MenuButton>
-
-        <MenuButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          isActive={editor.isActive("heading", { level: 2 })}
-          icon={Heading}
-        >
-          H2
-        </MenuButton>
-
-        <div className="border-r h-6 mx-2"></div>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          isActive={editor.isActive("bulletList")}
-          icon={List}
-        >
-          Bullet List
-        </MenuButton>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          isActive={editor.isActive("orderedList")}
-          icon={ListOrdered}
-        >
-          Ordered List
-        </MenuButton>
-
-        <MenuButton
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          isActive={editor.isActive("blockquote")}
-          icon={Quote}
-        >
-          Blockquote
-        </MenuButton>
+        {/* Heading Buttons */}
+        <div className="flex items-center gap-2">
+          <MenuButton
+            onClick={() => editor.chain().focus().setParagraph().run()}
+            isActive={editor.isActive("paragraph")}
+          >
+            Paragraph
+          </MenuButton>
+          {[1, 2, 3].map((level) => (
+            <MenuButton
+              key={level}
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level }).run()
+              }
+              isActive={editor.isActive("heading", { level })}
+              icon={Heading}
+            >
+              H{level}
+            </MenuButton>
+          ))}
+        </div>
 
         <div className="border-r h-6 mx-2"></div>
 
-        <MenuButton
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().chain().focus().undo().run()}
-          icon={Undo}
-        >
-          Undo
-        </MenuButton>
+        {/* List and Quote Buttons */}
+        <div className="flex items-center gap-2">
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            isActive={editor.isActive("bulletList")}
+            icon={List}
+          >
+            Bullet List
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            isActive={editor.isActive("orderedList")}
+            icon={ListOrdered}
+          >
+            Ordered List
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            isActive={editor.isActive("blockquote")}
+            icon={Quote}
+          >
+            Blockquote
+          </MenuButton>
+        </div>
 
-        <MenuButton
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().chain().focus().redo().run()}
-          icon={Redo}
-        >
-          Redo
-        </MenuButton>
+        <div className="border-r h-6 mx-2"></div>
+
+        {/* Undo/Redo Buttons */}
+        <div className="flex items-center gap-2">
+          <MenuButton
+            onClick={() => editor.chain().focus().undo().run()}
+            disabled={!editor.can().chain().focus().undo().run()}
+            icon={Undo}
+          >
+            Undo
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().redo().run()}
+            disabled={!editor.can().chain().focus().redo().run()}
+            icon={Redo}
+          >
+            Redo
+          </MenuButton>
+        </div>
       </div>
     </div>
   );
@@ -169,6 +167,7 @@ const MenuBar = () => {
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
   TextStyle.configure({ types: [ListItem.name] }),
+  
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
@@ -235,14 +234,13 @@ const BlogAdd = () => {
      const imageUrl = await uploadToCloudinary(bannerImage);
 
       // Submit blog post to backend
-      const response = await axios.post("http://localhost:3000/api/v1/blog/uploadBlog", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKENDSERVER}/blog/uploadBlog`, {
         title,
         bannerImage:imageUrl ,
         content,
-      });
+      },{withCredentials:true});
 
       // Handle successful submission
-      console.log("Blog post created:", response.data);
       // You might want to redirect to the blog list or show a success message
     } catch (err) {
       setError(err.message || "Failed to create blog post");

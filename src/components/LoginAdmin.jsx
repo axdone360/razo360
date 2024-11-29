@@ -14,12 +14,14 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/auth/adminAuth',{
+      const response = await axios.post(`${import.meta.env.VITE_BACKENDSERVER}/auth/adminAuth`,{
         user: credentials.email,
-        password: credentials.password
+        password: credentials.password,
+      },{
+        withCredentials:true
       });
       
-
+      
       if (response.status===200) {
       setAuth(true)
       localStorage.setItem('Admin_State', 'true');

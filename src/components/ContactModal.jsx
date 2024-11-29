@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { X, Send, Building2, Phone, User, MessageSquare } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const ContactModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await axios.post("http://localhost:3000/api/v1/lead/contactForm_lead_submission", { ...formData, leadBy: "Contact" });
+      await axios.post(`${import.meta.env.VITE_BACKENDSERVER}/lead/contactForm_lead_submission`, { ...formData, leadBy: "Contact" }, { withCredentials: true });
       setShowPopup(true);
       setTimeout(() => {
         setShowPopup(false);
@@ -40,96 +40,77 @@ const ContactModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-      <div className="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden relative">
-        <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 p-6 flex justify-between items-center">
-          <h3 className="text-2xl font-bold text-purple-900">Contact Us</h3>
-          <button
-            onClick={onClose}
-            className="text-purple-900 hover:text-purple-700 transition-colors"
-            aria-label="Close modal"
-          >
-            <X size={24} />
-          </button>
-        </div>
-        <form className="p-6 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <label htmlFor="name" className="text-sm font-medium text-gray-700 w-1/4">
-                Name
-              </label>
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  className="w-full border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  required
-                />
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              </div>
-            </div>
-            <div className="flex items-center">
-              <label htmlFor="companyName" className="text-sm font-medium text-gray-700 w-1/4">
-                Company
-              </label>
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  placeholder="Enter company name"
-                  className="w-full border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                />
-                <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              </div>
-            </div>
-            <div className="flex items-center">
-              <label htmlFor="phoneNumber" className="text-sm font-medium text-gray-700 w-1/4">
-                Phone
-              </label>
-              <div className="relative flex-1">
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  placeholder="Enter phone number"
-                  className="w-full border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  required
-                />
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              </div>
-            </div>
-            <div className="flex items-start">
-              <label htmlFor="message" className="text-sm font-medium text-gray-700 w-1/4 pt-2">
-                Message
-              </label>
-              <div className="relative flex-1">
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Type your message"
-                  className="w-full border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  required
-                ></textarea>
-                <MessageSquare className="absolute left-3 top-3 text-gray-400" size={18} />
-              </div>
-            </div>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+        {/* Close Button */}
+        <button 
+          onClick={onClose}
+          className="absolute right-6 top-6 text-gray-400 hover:text-gray-600"
+        >
+          <X size={20} />
+        </button>
+
+        {/* Header */}
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+          Contact Us
+        </h2>
+        <p className="text-gray-600 mb-8">
+          We'd love to hear from you. Please fill out this form and we'll get back to you as soon as possible.
+        </p>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4 text-black">
+          <div className="space-y-1">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              className="w-full px-2 py-2 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-gray-900 placeholder-gray-400"
+              required
+            />
           </div>
+
+          <div className="space-y-1">
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              placeholder="Company Name"
+              className="w-full px-2 py-2 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-gray-900 placeholder-gray-400"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              className="w-full px-2 py-2 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-gray-900 placeholder-gray-400"
+              required
+            />
+          </div>
+
+          <div className="space-y-1">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Tell us about your project?"
+              className="w-full px-2 py-2 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-gray-900 placeholder-gray-400 resize-none"
+              rows="3"
+              required
+            />
+          </div>
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full bg-yellow-500 hover:bg-yellow-600 text-purple-900 font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center ${
+            className={`w-full bg-primary text-white rounded-lg py-2.5 font-medium hover:bg-contactSecondry transition-colors mt-8 flex items-center justify-center ${
               isSubmitting ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
@@ -145,11 +126,12 @@ const ContactModal = ({ isOpen, onClose }) => {
             )}
           </button>
         </form>
+
         {showPopup && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-xl text-center">
-              <h4 className="text-xl font-semibold text-purple-900 mb-2">Thank You!</h4>
-              <p className="text-gray-700">Our team will contact you soon.</p>
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Thank You!</h4>
+              <p className="text-gray-700">We'll get back to you soon.</p>
             </div>
           </div>
         )}

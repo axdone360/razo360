@@ -5,7 +5,6 @@ import AdminDashboard from '../components/AdminDashboard';
 
 const Admin = () => {
     const [adminState,setAdminState] = useRecoilState(Admin_State)
-console.log("Connected",adminState);
 
     return (
         <div>

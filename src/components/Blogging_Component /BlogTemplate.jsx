@@ -17,7 +17,7 @@ const BlogDetail = () => {
   const fetchBlogDetail = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/v1/blog/post/${description}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKENDSERVER}/blog/post/${description}`,{withCredentials:true});
       setBlog(response.data.data);
       setIsLoading(false);
     } catch (error) {

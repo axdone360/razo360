@@ -12,7 +12,7 @@ const BlogList = () => {
 
   async function list() {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/blog/blogList");
+      const response = await axios.get(`${import.meta.env.VITE_BACKENDSERVER}/blog/blogList`,{withCredentials:true});
       setBlogs(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -24,7 +24,7 @@ const BlogList = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/v1/blog/${id}`);
+        await axios.delete(`${import.meta.env.VITE_BACKENDSERVER}/blog/${id}`,{withCredentials:true});
         setBlogs(blogs.filter(blog => blog.id !== id));
       } catch (error) {
         console.error("Error deleting blog:", error);

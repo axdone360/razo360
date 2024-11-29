@@ -45,7 +45,6 @@ const AddLeadModal = ({ isOpen, onClose, onSave }) => {
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     onSave(newLead);
     onClose();
   };
@@ -216,11 +215,10 @@ const Lead_management = () => {
   }, []);
 
   const fetchLeads = async () => {
-    console.log("fetching leads to refresh"); 
     
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/lead/leadList"
+        `${import.meta.env.VITE_BACKENDSERVER}/lead/leadList`,{withCredentials:true}
       );
       setLeads(response.data.Leads_List);
       setFilteredLeads(response.data.Leads_List);
@@ -231,10 +229,9 @@ const Lead_management = () => {
 
 
   const handleAddLead = async (newLead) => {
-    console.log("posting new elad");
     try {
       
-      await axios.post("http://localhost:3000/api/v1/lead/create", newLead);
+      await axios.post(`${import.meta.env.VITE_BACKENDSERVER}/lead/create`, newLead,{withCredentials:true});
       fetchLeads();
     } catch (error) {
       console.error("Error adding lead:", error);
@@ -277,9 +274,9 @@ const Lead_management = () => {
   const handleSaveUpdate = async () => {
     try {
       await axios.put(
-        `${import.meta.env.BACKENDSERVER}/lead/updateLead/${editingLead.id}`,
+        `${import.meta.env.VITE_BACKENDSERVER}/lead/updateLead/${editingLead.id}`,
         editingLead
-      );
+        ,{withCredentials:true});
       fetchLeads();
       setEditingLead(null);
     } catch (error) {
@@ -289,7 +286,7 @@ const Lead_management = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/v1/lead/delete/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKENDSERVER}/lead/delete/${id}`,{withCredentials:true});
       fetchLeads();
     } catch (error) {
       console.error("Error deleting lead:", error);
@@ -405,16 +402,17 @@ const Lead_management = () => {
   return (
     <div className="container mx-auto bg-white shadow-md rounded-lg overflow-hidden">
       <div className="p-4 flex justify-between items-center">
-        <button
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Lead Management</h2>
+        <div className="flex space-x-4 ">
+          <button className="bg-green-500  p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Inbound"})}>Inbound</button>
+          <button className="bg-orange-500 p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Outbound"})}>Outbound</button>
+          <button
           onClick={() => setIsModalOpen(true)}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2"
         >
           <Plus size={20} />
           Add Lead
         </button>
-        <div className="flex space-x-4 ">
-          <button className="bg-green-500  p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Inbound"})}>Inbound</button>
-          <button className="bg-orange-500 p-2 rounded-lg text-white font-bold hover:text-blue-950" onClick={()=> setFilters({...filters, leadFrom: "Outbound"})}>Outbound</button>
         </div>
       </div>
 

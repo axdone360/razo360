@@ -5,18 +5,27 @@ import {
   List, 
   Users, 
   ChevronRight, 
-  ChevronLeft ,
-  MessageCircleDashed
+  ChevronLeft,
+  MessageCircleDashed 
+
 } from 'lucide-react';
+
 import BlogAdd from './Blogging_Component /BlogAdd';
 import Lead_management from './Leads/Lead_management';
 import BlogList from './Blogging_Component /BlogList';
 import Contactlead from './Leads/contactlead';
 import Dashboard from './Dashboard/dashboard';
+import { Admin_State } from '../App';
+import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('welcome');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const setAuth = useSetRecoilState(Admin_State);
+  const navigate = useNavigate();
 
   const renderContent = () => {
     switch (activeSection) {
@@ -32,23 +41,19 @@ const AdminDashboard = () => {
       case 'leadManagement':
         return (
           <div className="bg-white h-full shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Lead Management</h2>
-            <Lead_management/>
+
+            <Lead_management />
           </div>
         );
-        case 'contactManagement':
-          return (
-            <div className="bg-white h-full shadow-md rounded-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Client Inquiries</h2>
-              <Contactlead />
-            </div>
-          );
-      default:
+      case 'contactManagement':
         return (
-      
-            <Dashboard/>
-     
+          <div className="bg-white h-full shadow-md rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Client Inquiries</h2>
+            <Contactlead />
+          </div>
         );
+      default:
+        return <Dashboard />;
     }
   };
 
@@ -67,13 +72,27 @@ const AdminDashboard = () => {
     </li>
   );
 
+  const handleLogout = () => {
+    // Clear Recoil state
+    setAuth(false);
+    
+    // Clear localStorage
+    localStorage.removeItem('Admin_State');
+
+    // Clear cookies (example for JS cookies; adjust for your setup)
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+    // Redirect to login page (optional)
+    navigate('/admin-panel')
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <div 
         className={`
           ${isSidebarOpen ? 'w-64' : 'w-20'} 
-          bg-white shadow-md transition-all duration-300 
+          bg-white shadow-md transition-all duration-300  
           border-r border-gray-200 py-6 px-4
         `}
       >
@@ -110,12 +129,22 @@ const AdminDashboard = () => {
             label="Lead Management" 
             section="leadManagement" 
           />
-                    <SidebarItem 
+          <SidebarItem 
             icon={<MessageCircleDashed size={20} />} 
             label="Client Inquiries" 
             section="contactManagement" 
           />
         </ul>
+        
+        {/* Logout Button */}
+        <button 
+          onClick={handleLogout}
+          className="
+            mt-10 w-full bg-red-500 text-white text-sm font-semibold py-2 px-4 
+            rounded-lg shadow-md hover:bg-red-600 transition-colors"
+        >
+          Logout
+        </button>
       </div>
 
       {/* Main Content Area */}

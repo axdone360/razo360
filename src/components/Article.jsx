@@ -13,7 +13,9 @@ const Article = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/blog/blogList");
+      const response = await axios.get(`${import.meta.env.VITE_BACKENDSERVER}/blog/blogList`,{
+        withCredentials:true
+      });
       setBlogs(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -25,10 +27,10 @@ const Article = () => {
   return (
     <>
         <Navbar/>
-      <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-10">
-          Explore Our <span className="text-indigo-600">Blogs</span>
+      <div className="min-h-screen  bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mt-20 mx-auto">
+        <h1 className="text-4xl font-extrabold text-primary text-center mb-10">
+          Explore Our Blogs
         </h1>
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
@@ -57,7 +59,7 @@ const Article = () => {
                   </p>
                   <button
                     onClick={() => window.location.href = `/blog/${blog.description}`}
-                    className="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:bg-indigo-500 transition-colors duration-300 inline-flex items-center justify-center"
+                    className="mt-4 bg-primary text-white px-4 py-2 rounded-md font-medium hover:bg-contactSecondry transition-colors duration-300 inline-flex items-center justify-center"
                   >
                     Read More
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
