@@ -23,7 +23,7 @@ function Navbar() {
           </div>
           <div className="hidden md:flex items-center space-x-4 text-white">
             <Link to="/contact" className="hover:text-yellow-300 px-3 py-2">Contact Us</Link>
-            <Link to="/about" className="hover:text-yellow-300 px-3 py-2">About use</Link>
+          
             <Link to="/article" className="hover:text-yellow-300 block px-3 py-2">Article</Link>
             <Link to="/services" className="hover:text-yellow-300 block px-3 py-2">OCS</Link>
             <button  onClick ={()=>setModalOpen(true)} className="bg-yellow-500 text-primary px-4 py-2 rounded hover:bg-yellow-400">
@@ -47,7 +47,7 @@ function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 bg-white z-20 text-primary space-y-2 p-4 flex flex-col items-center justify-center rounded-lg shadow-lg">
             <Link to="/contact" className="hover:text-yellow-300 px-3 py-2">Contact Us</Link>
-            <Link to="/about" className="hover:text-yellow-300 px-3 py-2">About</Link>
+      
             <Link to="/article" className="hover:text-yellow-300 block px-3 py-2">Article</Link>
             <Link to="/services" className="hover:text-yellow-300 block px-3 py-2">Services</Link>
           </div>
