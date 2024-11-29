@@ -178,21 +178,21 @@ const Services = () => {
                 alt="Random Avatar"
               />
 
-              <span className="text-gray-600">100+ Happy Customers</span>
+              <span className="text-gray-600">50+ Happy Customers</span>
             </div>
 
-            <h1 className="text-5xl font-bold mb-8" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
-  <span className="text-primary font-semibold"> We got you </span>
-  <span className="text-amber-400"> covered across all</span>
+            <h1 className="text-8xl font-bold mb-4" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
+  <span className="text-primary text-8xl font-semibold"> We got you </span>
+  <span className="text-amber-400 "> covered across all</span>
 </h1>
 
-<h2 className="text-4xl font-semibold mb-8" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
+<h2 className="text-6xl font-semibold mb-8" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
   <span className="text-primary font-semibold">
     stages from Outreach to Closing Journey
   </span>
 </h2>
 
-<p className="max-w-3xl text-xl font-semibold mx-auto text-gray-800 mb-8" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
+<p className="max-w-3xl text-3xl font-semibold mx-auto text-gray-800 mb-8" style={{ fontFamily: '"Clash Grotesk", sans-serif' }}>
   We help B2B businesses from Leads extraction to appointment
   setting and closing Potential prospects for them, we make sure
   that they are recurring clients for them.
