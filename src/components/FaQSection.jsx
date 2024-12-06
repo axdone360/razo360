@@ -1,8 +1,10 @@
 import { Check, Plus } from 'lucide-react';
 import React, { useState } from 'react';
+import ContactModal from './ContactModal';
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const faqs = [
     {
@@ -70,9 +72,11 @@ const FAQSection = () => {
           </h3>
           <button style={{ boxShadow: "0 8px 38px rgba(171, 28, 187, 0.6)" }}
           className="bg-yellow-500 hover:bg-yellow-600 text-purple-950 font-semibold py-3 px-8 max-sm:py-2 max-sm:px-4 rounded-md transition-colors"
-          onClick={() => window.open("https://wa.me/917907682565", "_blank")}>
+          onClick={() => setModalOpen(true)}>
             Connect with us
           </button>
+          <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+
         </div>
       </div>
     </div>

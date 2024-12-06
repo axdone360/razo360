@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, Users, Scale, Folder, LayoutGrid } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';

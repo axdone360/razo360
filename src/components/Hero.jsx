@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import arr1 from "../assets/arr1.webp";
 import arr2 from "../assets/arr2.webp";
+import ContactModal from "./ContactModal";
 
 export default function Hero() {
+  const [isModalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="bg-primary text-white py-12 md:py-16 lg:py-24 min-h-[700px] max-sm:min-h-[650px] relative flex flex-col items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
@@ -21,11 +24,13 @@ export default function Hero() {
         <button
           className="bg-yellow-500 w-full sm:w-auto text-primary px-8 max-sm:px-3 py-3 font-semibold hover:bg-yellow-400 transition-colors rounded-sm"
           style={{ boxShadow: "0 8px 38px rgba(171, 28, 187, 0.6)" }}
-          onClick={() => window.open("https://wa.me/917907682565", "_blank")}
+          onClick={() =>setModalOpen(true)}
         >
           Book An Appointment
         </button>
+
       </div>
+        <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
 
       <img
         src={arr1}
