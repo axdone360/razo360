@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import DOMPurify from 'dompurify';
+import './blogtemp.module.css';
 
 const BlogDetail = () => {
   const { description } = useParams();
@@ -18,6 +20,8 @@ const BlogDetail = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(`${import.meta.env.VITE_BACKENDSERVER}/blog/post/${description}`,{withCredentials:true});
+      console.log(response.data.data);
+      
       setBlog(response.data.data);
       setIsLoading(false);
     } catch (error) {
@@ -26,7 +30,8 @@ const BlogDetail = () => {
       setIsLoading(false);
     }
   };
-
+  
+  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -34,7 +39,8 @@ const BlogDetail = () => {
       </div>
     );
   }
-
+  
+  const clean = DOMPurify.sanitize(blog.content)
   if (error) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -61,9 +67,9 @@ const BlogDetail = () => {
           alt={blog.title} 
           className="w-full h-64 object-cover"
           />
-        <div className="p-8">
+        <div className="p-8 flex flex-col ">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">{blog.title}</h1>
-          <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          <span  dangerouslySetInnerHTML={{ __html: clean}} />
         </div>
       </div>
     </div>

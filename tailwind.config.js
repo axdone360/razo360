@@ -32,8 +32,9 @@ module.exports = {
       }
     },
     fontFamily: {
-      clash: ['"Clash Grotesk"', 'sans-serif'], // Custom font alias
-    },
+      clash: ['"clash"', 'sans-serif'], // Custom font alias
+    
+      },
   },
   plugins: [addVariablesForColors],
   
