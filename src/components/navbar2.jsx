@@ -3,8 +3,9 @@ import logo from '../assets/With-Glow-Logo.png';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ContactModal from './ContactModal';
+import black_logo from '../assets/new_razo360.png';
 
-function Navbar() {
+function SeconNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -13,26 +14,20 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-primary shadow-sm fixed w-full z-20 py-4 max-sm:py-0">
+    <nav className="bg-gray-50  fixed w-full z-20 py-4 max-sm:py-4 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link to={'/'}>
-              <img src={logo} alt="razo360° Logo" className="w-40" />
+              <img src={black_logo} alt="razo360° Logo" className="w-40" />
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-4 text-white">
+          <div className="hidden md:flex items-center space-x-4 text-primary">
             <Link to="/contact" className="hover:text-yellow-300 px-3 py-2">Contact Us</Link>
-<<<<<<< HEAD
-          
+            
             <Link to="/article" className="hover:text-yellow-300 block px-3 py-2">Article</Link>
             <Link to="/services" className="hover:text-yellow-300 block px-3 py-2">OCS</Link>
             <button  onClick ={()=>setModalOpen(true)} className="bg-yellow-500 text-primary px-4 py-2 rounded hover:bg-yellow-400">
-=======
-            <Link to="/about" className="hover:text-yellow-300 px-3 py-2">About</Link>
-            <button className="bg-yellow-500 text-primary px-4 py-2 rounded hover:bg-yellow-400"
-                 onClick={() => window.open("https://wa.me/917907682565", "_blank")}>
->>>>>>> upstream/main
               Get Started
             </button>
             <ContactModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
@@ -53,7 +48,7 @@ function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 bg-white z-20 text-primary space-y-2 p-4 flex flex-col items-center justify-center rounded-lg shadow-lg">
             <Link to="/contact" className="hover:text-yellow-300 px-3 py-2">Contact Us</Link>
-      
+          
             <Link to="/article" className="hover:text-yellow-300 block px-3 py-2">Article</Link>
             <Link to="/services" className="hover:text-yellow-300 block px-3 py-2">Services</Link>
           </div>
@@ -63,4 +58,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default SeconNav;
